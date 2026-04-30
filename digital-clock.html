@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .clock {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .time {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        .timezone {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="timezone">UTC</div>
+        <div class="time" id="utcTime"></div>
+        <div class="timezone">UTC+5:30 (IST)</div>
+        <div class="time" id="istTime"></div>
+        <div class="timezone">UTC-4 (EDT)</div>
+        <div class="time" id="edtTime"></div>
+        <div class="timezone">UTC+1 (CET)</div>
+        <div class="time" id="cetTime"></div>
+    </div>
+    <script>
+        function updateTime() {
+            const utcDate = new Date();
+            document.getElementById('utcTime').innerHTML = utcDate.toUTCString().slice(17, 25);
+            const istDate = new Date(utcDate.getTime() + (5.5 * 60 * 60 * 1000));
+            document.getElementById('istTime').innerHTML = istDate.toUTCString().slice(17, 25);
+            const edtDate = new Date(utcDate.getTime() - (4 * 60 * 60 * 1000));
+            document.getElementById('edtTime').innerHTML = edtDate.toUTCString().slice(17, 25);
+            const cetDate = new Date(utcDate.getTime() + (1 * 60 * 60 * 1000));
+            document.getElementById('cetTime').innerHTML = cetDate.toUTCString().slice(17, 25);
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
